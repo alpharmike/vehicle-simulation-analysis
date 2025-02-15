@@ -23,6 +23,7 @@ def get_processed_metadata(meta_file_path: str):
     vehicles_meta_df = preprocess_data(vehicles_meta_df)
     co_meta_df = preprocess_data(co_meta_df)
 
+    locations_meta_df["capacity"] = locations_meta_df["capacity"].fillna(float('inf'))
     locations_meta_df["location_type"] = locations_meta_df["location_name"].apply(lambda loc: re.match(pattern=r"[A-Z]+", string=loc)[0])
 
     return locations_meta_df, vehicles_meta_df, co_meta_df
