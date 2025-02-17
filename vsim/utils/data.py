@@ -100,7 +100,7 @@ def create_event_log(parsed_logs: list[tuple[str, dict]]) -> pd.DataFrame:
                 reported_duration = log_data['duration_in_s']
                 end_time = log_time + timedelta(seconds=min(extracted_duration, reported_duration))
             elif log_data["status"] == "waited":
-                action = "wait for a lane to be freed"
+                action = f"wait for free lane to {log_data['action'].lower()}"
                 start_time = log_time - timedelta(seconds=log_data['duration_in_s'])
                 end_time = log_time
             elif log_data["status"] == "finished":
